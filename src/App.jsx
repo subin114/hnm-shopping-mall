@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import ProductAll from "./page/ProductAll";
 import Login from "./page/Login";
 import Navbar from "./components/Navbar";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import PrivateRoute from "./route/PrivateRoute";
 
 // 1. 전체상품페이지, 로그인, 상품상세페이지
@@ -18,9 +18,6 @@ import PrivateRoute from "./route/PrivateRoute";
 // 7. 상품을 검색할 수 있다
 function App() {
   const [authenticate, setAuthenticate] = useState(false); // true인 경우 로그인 O, false인 경우 로그인 X
-  useEffect(() => {
-    console.log("qq", authenticate);
-  }, [authenticate]);
 
   return (
     <div>

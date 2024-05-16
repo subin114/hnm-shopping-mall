@@ -5,7 +5,6 @@ import { Form, Button, Container } from "react-bootstrap";
 const Login = ({ setAuthenticate }) => {
   const loginUser = (event) => {
     event.preventDefault();
-    console.log("giogigigi");
     setAuthenticate(true);
     navigate("/");
   };

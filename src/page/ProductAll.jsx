@@ -1,5 +1,4 @@
 /* eslint-disable no-unused-vars */
-/* eslint-disable react/jsx-key */
 import { useEffect, useState } from "react";
 import ProductCard from "../components/ProductCard";
 import { Container, Row, Col, Alert } from "react-bootstrap";
@@ -13,7 +12,6 @@ const ProductAll = () => {
   const getProducts = async () => {
     try {
       let searchQuery = query.get("q") || "";
-      console.log("쿼리값은?", searchQuery);
       let url = `http://localhost:5000/products?q=${searchQuery}`;
       let response = await fetch(url);
       let data = await response.json();
@@ -49,8 +47,8 @@ const ProductAll = () => {
           <Row>
             {productList.length > 0 &&
               productList.map((menu) => (
-                <Col lg={3}>
-                  <ProductCard key={menu.id} item={menu} />
+                <Col lg={3} key={menu.id}>
+                  <ProductCard item={menu} />
                 </Col>
               ))}
           </Row>

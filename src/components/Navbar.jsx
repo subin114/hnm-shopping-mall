@@ -1,8 +1,9 @@
 import "./Navbar.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-regular-svg-icons";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faSearch, faBars } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate, Link } from "react-router-dom";
+import { useState } from "react";
 
 const Navbar = ({ authenticate, setAuthenticate }) => {
   const menuList = [
@@ -17,24 +18,39 @@ const Navbar = ({ authenticate, setAuthenticate }) => {
   ];
 
   const navigate = useNavigate();
+  let [width, setWidth] = useState(0);
 
   /** 검색 기능 함수 */
   const search = (event) => {
     if (event.key === "Enter") {
       // 입력한 값 받아오기
       let keyword = event.target.value;
-
       // url 변경
       navigate(`/?q=${keyword}`);
     }
   };
 
   const logoutUser = () => setAuthenticate(false);
-  console.log("확인", authenticate);
 
   return (
     <div className="Navbar">
-      <div>
+      {/* 반응형 추가 */}
+      <div className="side-menu" style={{ width: width }}>
+        <button className="closebtn" onClick={() => setWidth(0)}>
+          &times;
+        </button>
+        <div className="side-menu-list" id="menu-list">
+          {menuList.map((menu, index) => (
+            <button key={index}>{menu}</button>
+          ))}
+        </div>
+      </div>
+      <div className="top-nav">
+        {/* 반응형 추가 */}
+        <div className="burger-menu hide">
+          <FontAwesomeIcon icon={faBars} onClick={() => setWidth(250)} />
+        </div>
+
         {authenticate ? (
           <div className="login-btn" onClick={logoutUser}>
             <Link to="/" className="btn-link">
