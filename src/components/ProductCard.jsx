@@ -1,8 +1,14 @@
+import { useNavigate } from "react-router-dom";
 import "./ProductCard.scss";
 
 const ProductCard = ({ item }) => {
+  const navigate = useNavigate();
+  const showDetail = () => {
+    navigate(`/product/${item.id}`);
+  };
+
   return (
-    <div className="ProductCard">
+    <div className="ProductCard" onClick={showDetail}>
       <div>
         <img src={item?.img} />
       </div>

@@ -1,0 +1,21 @@
+Form {
+  width: 30%;
+  margin: 30px auto 0;
+  font-size: 14px;
+
+  .login-input {
+    font-size: 14px;
+
+    &:focus {
+      outline: none;
+      box-shadow: none;
+      border-color: #e50010;
+    }
+  }
+
+  .login-btn {
+    font-size: 14px;
+    width: 100%;
+    margin-top: 20px;
+  }
+}

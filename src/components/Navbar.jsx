@@ -6,12 +6,12 @@ import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const menuList = [
-    "여성",
-    "Divided",
-    "남성",
-    "신생아/유아",
-    "아동",
-    "H&M Home",
+    "Women",
+    "Men",
+    "Baby",
+    "Kids",
+    "H&M HOME",
+    "Sport",
     "Sale",
     "지속가능성",
   ];
