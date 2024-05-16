@@ -1,0 +1,43 @@
+.ProductCard {
+  display: flex;
+  flex-direction: column;
+  font-size: 13px;
+  margin-bottom: 20px;
+
+  div {
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 5px;
+
+    img {
+      width: 100%;
+      transition: 0.3s all;
+      transform: scale(1);
+      cursor: pointer;
+
+      &:hover {
+        transform: scale(1.03);
+      }
+    }
+  }
+
+  .choice {
+    font-size: 11px;
+    color: #e50010;
+  }
+
+  p {
+    margin-bottom: 0;
+
+    .new {
+      margin-left: 3px;
+      font-size: 10px;
+      color: white;
+      background-color: #e50010;
+      border-radius: 5px;
+      padding: 0 3px;
+    }
+  }
+}

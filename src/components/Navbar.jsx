@@ -2,6 +2,7 @@ import "./Navbar.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-regular-svg-icons";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const menuList = [
@@ -15,12 +16,18 @@ const Navbar = () => {
     "지속가능성",
   ];
 
+  const loginNav = useNavigate();
+  const goLogin = () => {
+    loginNav("/login");
+  };
+
   return (
     <div className="Navbar">
       <div>
-        <div className="login-btn">
+        <div className="login-btn" onClick={goLogin}>
           <FontAwesomeIcon icon={faUser} className="login-icon" />
           로그인
+          {}
         </div>
       </div>
       <div className="logo">
