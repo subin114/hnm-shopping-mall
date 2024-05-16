@@ -2,9 +2,9 @@ import "./Navbar.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-regular-svg-icons";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = ({ authenticate, setAuthenticate }) => {
   const menuList = [
     "Women",
     "Men",
@@ -16,26 +16,49 @@ const Navbar = () => {
     "지속가능성",
   ];
 
-  const loginNav = useNavigate();
-  const goLogin = () => {
-    loginNav("/login");
+  const navigate = useNavigate();
+
+  /** 검색 기능 함수 */
+  const search = (event) => {
+    if (event.key === "Enter") {
+      // 입력한 값 받아오기
+      let keyword = event.target.value;
+
+      // url 변경
+      navigate(`/?q=${keyword}`);
+    }
   };
+
+  const logoutUser = () => setAuthenticate(false);
+  console.log("확인", authenticate);
 
   return (
     <div className="Navbar">
       <div>
-        <div className="login-btn" onClick={goLogin}>
-          <FontAwesomeIcon icon={faUser} className="login-icon" />
-          로그인
-          {}
-        </div>
+        {authenticate ? (
+          <div className="login-btn" onClick={logoutUser}>
+            <Link to="/" className="btn-link">
+              <FontAwesomeIcon icon={faUser} className="login-icon" />
+              <span>로그아웃</span>
+            </Link>
+          </div>
+        ) : (
+          <div className="login-btn">
+            <Link to="/login" className="btn-link">
+              <FontAwesomeIcon icon={faUser} className="login-icon" />
+              <span>로그인</span>
+            </Link>
+          </div>
+        )}
       </div>
       <div className="logo">
-        <img
-          width={60}
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/H%26M-Logo.svg/1280px-H%26M-Logo.svg.png"
-          alt="H&M"
-        />
+        <Link to="/">
+          <img
+            width={60}
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/H%26M-Logo.svg/1280px-H%26M-Logo.svg.png"
+            alt="H&M"
+          />
+        </Link>
       </div>
       <div className="menu-section">
         <ul className="menu-list">
@@ -46,7 +69,11 @@ const Navbar = () => {
 
         <div className="search">
           <FontAwesomeIcon icon={faSearch} className="search-icon" />
-          <input type="text" placeholder="검색" />
+          <input
+            type="text"
+            placeholder="검색"
+            onKeyPress={(event) => search(event)}
+          />
         </div>
       </div>
     </div>

@@ -12,3 +12,11 @@ body {
   background-color: #faf9f8;
   font-family: "Noto Sans KR", sans-serif;
 }
+
+/* 드래그 색상 변경 */
+::-moz-selection {
+  background: #4647471f;
+}
+::selection {
+  background: #4647471f;
+}

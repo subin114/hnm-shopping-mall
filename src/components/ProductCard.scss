@@ -26,10 +26,12 @@
   .choice {
     font-size: 11px;
     color: #e50010;
+    cursor: pointer;
   }
 
   p {
     margin-bottom: 0;
+    cursor: pointer;
 
     .new {
       margin-left: 3px;
