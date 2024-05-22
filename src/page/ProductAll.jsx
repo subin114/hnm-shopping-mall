@@ -4,26 +4,21 @@ import ProductCard from "../components/ProductCard";
 import { Container, Row, Col, Alert } from "react-bootstrap";
 import { useSearchParams } from "react-router-dom";
 
+import { productAction } from "./../redux/actions/productAction";
+import { useDispatch, useSelector } from "react-redux";
+
 const ProductAll = () => {
-  const [productList, setProductList] = useState([]);
+  const productList = useSelector((state) => state.product.productList);
   const [query, setQuery] = useSearchParams();
   let [error, setError] = useState("");
 
-  const getProducts = async () => {
+  const dispatch = useDispatch();
+
+  const getProducts = () => {
     try {
       let searchQuery = query.get("q") || "";
-      let url = `https://my-json-server.typicode.com/subin114/hnm-shopping-mall/products?q=${searchQuery}`;
-      // let url = `http://localhost:5000/products?q=${searchQuery}`;
-      let response = await fetch(url);
-      let data = await response.json();
 
-      if (data.length < 1) {
-        if (searchQuery !== "")
-          setError(`${searchQuery}와 일치하는 상품이 없습니다.`);
-        else throw new Error("결과가 없습니다.");
-      }
-
-      setProductList(data);
+      dispatch(productAction.getProducts(searchQuery));
     } catch (err) {
       setError(err.message);
     }

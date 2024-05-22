@@ -1,15 +1,23 @@
+/* eslint-disable no-unused-vars */
 import { useNavigate } from "react-router-dom";
 import "./Login.scss";
 import { Form, Button, Container } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { authenticateAction } from "../redux/actions/authenticateAction";
+import { useState } from "react";
 
 const Login = ({ setAuthenticate }) => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [id, setId] = useState("");
+  const [password, setPassword] = useState("");
+
   const loginUser = (event) => {
     event.preventDefault();
-    setAuthenticate(true);
+    // setAuthenticate(true);
+    dispatch(authenticateAction.login(id, password));
     navigate("/");
   };
-
-  const navigate = useNavigate();
 
   return (
     <div>
@@ -21,6 +29,7 @@ const Login = ({ setAuthenticate }) => {
               className="login-input"
               type="email"
               placeholder="Enter email"
+              onChange={(e) => setId(e.target.value)}
             />
           </Form.Group>
 
@@ -30,6 +39,7 @@ const Login = ({ setAuthenticate }) => {
               className="login-input"
               type="password"
               placeholder="Password"
+              onChange={(e) => setPassword(e.target.value)}
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicCheckbox">
