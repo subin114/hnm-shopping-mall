@@ -12,10 +12,19 @@ function getProducts(searchQuery) {
     //   else throw new Error("결과가 없습니다.");
     // }
 
-    // setProductList(data);
     console.log(data);
     dispatch({ type: "GET_PRODUCT_SUCCESS", payload: { data } });
   };
 }
 
-export const productAction = { getProducts };
+function getProductDetail(id) {
+  return async (dispatch, getState) => {
+    let url = `https://my-json-server.typicode.com/subin114/hnm-shopping-mall/products/${id}`;
+    const response = await fetch(url);
+    const data = await response.json();
+
+    dispatch({ type: "GET_SINGLE_PRODUCT_SUCCESS", payload: { data } });
+  };
+}
+
+export const productAction = { getProducts, getProductDetail };

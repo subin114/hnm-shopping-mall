@@ -4,8 +4,10 @@ import { faUser } from "@fortawesome/free-regular-svg-icons";
 import { faSearch, faBars } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate, Link } from "react-router-dom";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { authenticateAction } from "../redux/actions/authenticateAction";
 
-const Navbar = ({ authenticate, setAuthenticate }) => {
+const Navbar = () => {
   const menuList = [
     "Women",
     "Men",
@@ -30,7 +32,12 @@ const Navbar = ({ authenticate, setAuthenticate }) => {
     }
   };
 
-  const logoutUser = () => setAuthenticate(false);
+  const isAuthenticated = useSelector((state) => state.auth.authenticate);
+  const dispatch = useDispatch();
+
+  const logoutUser = () => {
+    dispatch(authenticateAction.logout());
+  };
 
   return (
     <div className="Navbar">
@@ -51,7 +58,7 @@ const Navbar = ({ authenticate, setAuthenticate }) => {
           <FontAwesomeIcon icon={faBars} onClick={() => setWidth(250)} />
         </div>
 
-        {authenticate ? (
+        {isAuthenticated ? (
           <div className="login-btn" onClick={logoutUser}>
             <Link to="/" className="btn-link">
               <FontAwesomeIcon icon={faUser} className="login-icon" />

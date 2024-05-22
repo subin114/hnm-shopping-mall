@@ -6,4 +6,11 @@ function login(id, password) {
   };
 }
 
-export const authenticateAction = { login };
+function logout() {
+  return (dispatch, getState) => {
+    console.log("logout success action");
+    dispatch({ type: "LOGOUT" });
+  };
+}
+
+export const authenticateAction = { login, logout };
